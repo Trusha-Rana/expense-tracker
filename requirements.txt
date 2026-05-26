@@ -1,0 +1,35 @@
+# ── Web Framework ──────────────────────────────────────────────────────────────
+streamlit>=1.35.0              # Multi-page UI framework
+
+# ── Database ───────────────────────────────────────────────────────────────────
+sqlalchemy>=2.0.0              # ORM — abstracts MySQL so we can swap DBs later
+pymysql>=1.1.0                 # Pure-Python MySQL driver (no C dependencies)
+alembic>=1.13.0                # DB migration tool — versioned schema changes
+
+# ── PDF Parsing ────────────────────────────────────────────────────────────────
+pdfplumber>=0.11.0             # Best for text-heavy PDFs (statements, invoices)
+pymupdf>=1.24.0                # Fallback — handles scanned/image-heavy PDFs
+
+# ── Data Processing ────────────────────────────────────────────────────────────
+pandas>=2.2.0                  # DataFrames for all tabular data work
+numpy>=1.26.0                  # Numerical ops used by pandas + scikit-learn
+
+# ── Merchant Resolution ────────────────────────────────────────────────────────
+rapidfuzz>=3.9.0               # Fast fuzzy string matching (replaces fuzzywuzzy)
+
+# ── Visualization ──────────────────────────────────────────────────────────────
+plotly>=5.22.0                 # Interactive charts — best Streamlit integration
+altair>=5.3.0                  # Declarative charts for simpler plots
+
+# ── ML / Forecasting ──────────────────────────────────────────────────────────
+scikit-learn>=1.5.0            # LinearRegression, LabelEncoder, preprocessing
+statsmodels>=0.14.2            # ARIMA / time-series models for forecasting
+
+# ── Config & Utilities ─────────────────────────────────────────────────────────
+pyyaml>=6.0.1                  # Parse YAML config files (category/merchant rules)
+python-dotenv>=1.0.1           # Load .env vars (DB credentials, API keys)
+anthropic>=0.28.0              # Claude API — used in Phase 2 AI categorization
+
+# ── Dev / Testing ──────────────────────────────────────────────────────────────
+pytest>=8.2.0
+pytest-cov>=5.0.0

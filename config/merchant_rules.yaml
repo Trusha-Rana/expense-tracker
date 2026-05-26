@@ -1,0 +1,220 @@
+# merchant_rules.yaml
+# ====================
+# Maps raw/messy PDF merchant names to their clean canonical forms.
+#
+# HOW IT WORKS:
+#   Before fuzzy matching runs, the resolver checks each rule's `patterns`
+#   against the raw merchant name (lowercased, stripped).
+#   If a pattern is found anywhere in the name → replace with `canonical`.
+#   Rules are checked in ORDER (top to bottom wins).
+#
+# PATTERN TYPES:
+#   - Simple substring: "tim horton" matches "TIM HORTONS #1234 BRAMPTON ON"
+#   - Regex: prefix with "regex:" → "regex:tmh?rtns?" matches "TMHRTNS"
+#
+# WHY YAML RULES instead of pure fuzzy matching?
+#   Fuzzy matching is probabilistic — it can fail on heavily abbreviated names
+#   (TMHRTNS → Tim Hortons has low character similarity).
+#   Explicit rules handle the edge cases that fuzzy matching can't.
+
+rules:
+
+  # ── Coffee & Fast Food ─────────────────────────────────────────────────────
+  - canonical: "Tim Hortons"
+    patterns:
+      - "tim horton"
+      - "timhorton"
+      - "regex:tmh?rtns?"
+      - "tims coffee"
+
+  - canonical: "Starbucks"
+    patterns:
+      - "starbucks"
+      - "sbux"
+      - "regex:starb[uo]cks?"
+
+  - canonical: "McDonald's"
+    patterns:
+      - "mcdonald"
+      - "mcdonalds"
+      - "mcd "
+      - "regex:mc\\s?d"
+
+  - canonical: "Subway"
+    patterns:
+      - "subway"
+      - "sub way"
+
+  - canonical: "KFC"
+    patterns:
+      - "kfc"
+      - "kentucky fried"
+      - "kentucky frd"
+
+  - canonical: "Wendy's"
+    patterns:
+      - "wendy"
+      - "wendys"
+      - "wendy's"
+
+  - canonical: "Harvey's"
+    patterns:
+      - "harvey"
+      - "harveys"
+
+  - canonical: "Dairy Queen"
+    patterns:
+      - "dairy queen"
+      - "dq grill"
+      - "dq treat"
+
+  - canonical: "Domino's Pizza"
+    patterns:
+      - "domino"
+      - "dominos"
+
+  # ── Grocery Stores ─────────────────────────────────────────────────────────
+  - canonical: "Walmart"
+    patterns:
+      - "wal-mart"
+      - "walmart"
+      - "wmt "
+      - "regex:wal\\s?mart"
+
+  - canonical: "Costco"
+    patterns:
+      - "costco"
+      - "cos wholesale"
+
+  - canonical: "No Frills"
+    patterns:
+      - "no frills"
+      - "nofrills"
+      - "no-frills"
+
+  - canonical: "Loblaws"
+    patterns:
+      - "loblaws"
+      - "loblaw"
+
+  - canonical: "Metro"
+    patterns:
+      - "metro inc"
+      - "metro grocery"
+      - "metro supermarket"
+
+  - canonical: "FreshCo"
+    patterns:
+      - "freshco"
+      - "fresh co"
+
+  - canonical: "Shoppers Drug Mart"
+    patterns:
+      - "shoppers drug"
+      - "shoppers dm"
+      - "sdm "
+      - "shoppers"
+
+  # ── Gas Stations ───────────────────────────────────────────────────────────
+  - canonical: "Petro-Canada"
+    patterns:
+      - "petro canada"
+      - "petrocanada"
+      - "petro-canada"
+
+  - canonical: "Shell"
+    patterns:
+      - "shell service"
+      - "shell gas"
+      - "shell canada"
+
+  - canonical: "Esso"
+    patterns:
+      - "esso"
+      - "esso gas"
+
+  # ── Delivery & Ride Apps ───────────────────────────────────────────────────
+  - canonical: "Uber"
+    patterns:
+      - "regex:uber(?! eats)"
+      - "uber trip"
+      - "uber.com"
+
+  - canonical: "Uber Eats"
+    patterns:
+      - "uber eats"
+      - "ubereats"
+
+  - canonical: "DoorDash"
+    patterns:
+      - "doordash"
+      - "door dash"
+
+  - canonical: "Skip The Dishes"
+    patterns:
+      - "skip the dishes"
+      - "skipthedishes"
+      - "skip thedishes"
+
+  # ── Streaming Services ─────────────────────────────────────────────────────
+  - canonical: "Netflix"
+    patterns:
+      - "netflix"
+      - "netflix.com"
+
+  - canonical: "Spotify"
+    patterns:
+      - "spotify"
+      - "spotify ab"
+      - "spotify canada"
+
+  - canonical: "Apple"
+    patterns:
+      - "apple.com/bill"
+      - "apple canada"
+      - "itunes"
+      - "app store"
+
+  - canonical: "Amazon"
+    patterns:
+      - "amazon.ca"
+      - "amazon.com"
+      - "amzn"
+      - "amazon prime"
+      - "amazon mktpl"
+      - "amazon marketplace"
+
+  # ── Banks & Financial ──────────────────────────────────────────────────────
+  - canonical: "TD Bank Fee"
+    patterns:
+      - "td bank fee"
+      - "td monthly fee"
+      - "toronto dominion fee"
+
+  - canonical: "Wealthsimple"
+    patterns:
+      - "wealthsimple"
+      - "wlthsmpl"
+
+  # ── Telecom ────────────────────────────────────────────────────────────────
+  - canonical: "Rogers"
+    patterns:
+      - "rogers comm"
+      - "rogers canada"
+      - "rogers wireless"
+
+  - canonical: "Bell Canada"
+    patterns:
+      - "bell canada"
+      - "bell mobility"
+      - "bell aliant"
+
+  - canonical: "Telus"
+    patterns:
+      - "telus comm"
+      - "telus mobility"
+
+  - canonical: "Fido"
+    patterns:
+      - "fido mobile"
+      - "fido solutions"
